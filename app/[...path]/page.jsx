@@ -71,9 +71,9 @@ const defaultMetadata = {
     title: "Početna | Crkveni Magacin",
     description: "Dobrodošli na Crkveni Magacin",
     type: "website",
-    url: "https://www.ankersrbija.rs",
-    image: "https://www.ankersrbija.rs/images/logo/logo.png",
-    site_name: "ankersrbija.rs",
+    url: "https://www.crkvenimagacin.rs",
+    image: "https://www.crkvenimagacin.rs/images/logo/logo.png",
+    site_name: "crkvenimagacin.rs",
     locale: "sr_RS",
   },
 };
@@ -154,7 +154,7 @@ export async function generateMetadata({
 
       const image =
         convertHttpToHttps(productSEO?.meta_image) ||
-        "https://www.ankersrbija.rs/images/logo.png";
+        "https://www.crkvenimagacin.rs/images/logo.png";
 
       if (productSEO) {
         return {

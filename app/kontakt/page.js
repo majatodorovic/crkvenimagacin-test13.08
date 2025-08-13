@@ -43,7 +43,7 @@ export const generateMetadata = async () => {
       type: "website",
       images: [
         {
-          url: "https://www.ankersrbija.rs/images/logo/logo.png",
+          url: "https://www.crkvenimagacin.rs/images/logo/logo.png",
           width: 800,
           height: 600,
           alt: "Crkveni Magacin",

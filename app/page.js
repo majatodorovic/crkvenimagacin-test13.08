@@ -146,7 +146,7 @@ export const generateMetadata = async () => {
         {
           url:
             data?.social?.share_image ??
-            "https://www.ankersrbija.rs/images/logo/logo.png",
+            "https://www.crkvenimagacin.rs/images/logo/logo.png",
           width: 800,
           height: 600,
           alt: "Crkveni Magacin",

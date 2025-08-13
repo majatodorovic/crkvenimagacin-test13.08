@@ -49,7 +49,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 
-})(window,document,'script','dataLayer','${process.env.GTM_CODE}');`,
+})(window,document,'script','dataLayer','${process.env.GTM_ID}');`,
           }}
         />
       </head>
@@ -102,11 +102,11 @@ export const metadata = {
     title: "Početna | Crkveni Magacin",
     description: "Dobrodošli na Crkveni Magacin",
     type: "website",
-    url: "https://www.ankersrbija.rs/",
+    url: "https://www.crkvenimagacin.rs/",
     siteName: "Crkveni Magacin",
     images: [
       {
-        url: "https://www.ankersrbija.rs/images/logo/logo.png",
+        url: "https://www.crkvenimagacin.rs/images/logo/logo.png",
         width: 800,
         height: 600,
         alt: "Crkveni Magacin",
