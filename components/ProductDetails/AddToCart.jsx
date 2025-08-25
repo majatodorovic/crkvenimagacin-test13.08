@@ -84,7 +84,7 @@ const AddToCart = ({
     <div className="flex flex-col gap-y-4">
       <button
         disabled={isPending}
-        className={`mainButton w-full max-w-[320px] !bg-gold !py-2 !text-base !text-black lg:!py-4 lg:!text-[19px]`}
+        className={`mainButton w-full max-w-[320px] !bg-gold !py-2 !text-base !text-black hover:!bg-primary hover:!text-white lg:!py-4 lg:!text-[19px]`}
         onClick={() => {
           handleAddToCart();
         }}

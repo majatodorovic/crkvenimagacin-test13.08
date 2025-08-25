@@ -80,8 +80,13 @@ export const CheckoutData = ({
   });
   const { mutate: login, isPending: isPendingLogin } = useLogin();
   const { mutate: removeFromCart, isSuccess: isRemoved } = useRemoveFromCart();
-  const { mutate: checkoutCreateAccount, isSuccess: isAccountCreated } =
-    useCheckoutCreateAccount();
+  const {
+    mutate: checkoutCreateAccount,
+    isSuccess: isAccountCreated,
+    data: accountCreationData,
+    isError: isAccountCreationError,
+    error: accountCreationError,
+  } = useCheckoutCreateAccount();
   const [sureCheck, setSureCheck] = useState(false);
   const [itemToRemove, setItemToRemove] = useState(null);
   const [registerChecked, setRegisterChecked] = useState(false);
@@ -117,6 +122,7 @@ export const CheckoutData = ({
     data: checkOutData,
     mutate: checkOutMutate,
     isPending,
+    isError: isCheckoutError,
     isSuccess: isCheckoutSuccess,
   } = useCheckout({
     formData: dataTmp,
@@ -162,29 +168,49 @@ export const CheckoutData = ({
     }
   }, [isCheckoutSuccess, checkOutData, router]);
 
-  // Auto login after successful account creation
   useEffect(() => {
-    if (isAccountCreated && registrationData) {
+    if (isAccountCreated && accountCreationData?.code === 200) {
+      checkOutMutate();
+    }
+  }, [isAccountCreated, accountCreationData]);
+
+  useEffect(() => {
+    if (
+      isAccountCreationError ||
+      (isAccountCreated && accountCreationData?.code !== 200)
+    ) {
+      setRegistrationData(null);
+    }
+  }, [
+    isAccountCreationError,
+    isAccountCreated,
+    accountCreationData,
+    accountCreationError,
+  ]);
+
+  useEffect(() => {
+    if (isCheckoutSuccess && checkOutData) {
       const { email, password } = registrationData;
-      // Direct login without redirect
       POST(`/customers/sign-in/login`, {
         email: email,
         password: password,
       }).then((res) => {
         if (res?.code === 200) {
-          // Set cookie and update login state without redirect
           const customer_token = res?.payload?.customer_token;
           if (customer_token) {
-            // Set the cookie directly
             document.cookie = `customer_token=${customer_token}; expires=${new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString()}; path=/`;
-            // Continue with checkout after successful login
-            checkOutMutate();
           }
         }
       });
-      setRegistrationData(null); // Clear the data after login attempt
+      setRegistrationData(null);
     }
-  }, [isAccountCreated, registrationData, checkOutMutate]);
+  }, [isCheckoutSuccess]);
+
+  useEffect(() => {
+    if (isCheckoutError) {
+      router.push("/korpa");
+    }
+  }, [isCheckoutError, router]);
 
   useEffect(
     () => {
@@ -386,8 +412,9 @@ export const CheckoutData = ({
               // Store registration data for auto login
               setRegistrationData({ email, password: registerPassword });
               checkoutCreateAccount(payload);
+            } else {
+              checkOutMutate();
             }
-            checkOutMutate();
           }}
           selected={selected}
           setDataTmp={setDataTmp}

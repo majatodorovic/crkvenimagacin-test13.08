@@ -248,7 +248,12 @@ export const renderDiscountPrices = (data = {}) => {
           >
             {currencyFormat(price?.min?.price?.discount, price?.currency)}
           </p>
-          <div className="h-4 w-[1px] bg-[#aeaeae] max-sm:hidden" />
+          <div 
+  className={`h-4 w-[1px] ${
+    discount_percent > 0 ? "bg-yellow-400" : "bg-[#aeaeae]"
+  } max-sm:hidden`} 
+/>
+
           <div className="flex items-center gap-3">
             <div
               className={`group relative text-[15px] text-[#A4A4A4] line-through ${data?.is_details ? "text-base lg:!text-[19px]" : ""}`}
@@ -272,7 +277,12 @@ export const renderDiscountPrices = (data = {}) => {
             {currencyFormat(price?.min?.price?.discount, price?.currency)} -{" "}
             {currencyFormat(price?.max?.price?.discount, price?.currency)}
           </p>
-          <div className="h-4 w-[1px] bg-[#aeaeae] max-sm:hidden" />
+          <div 
+  className={`h-4 w-[1px] ${
+    discount_percent > 0 ? "bg-yellow-400" : "bg-[#aeaeae]"
+  } max-sm:hidden`} 
+/>
+
           <div className="flex items-center gap-3">
             <div
               className={`group relative text-[15px] text-[#A4A4A4] line-through ${data?.is_details ? "text-base lg:!text-[19px]" : ""}`}
@@ -297,7 +307,12 @@ export const renderDiscountPrices = (data = {}) => {
         >
           {currencyFormat(price?.price?.discount, price?.currency)}
         </p>
-        <div className="h-4 w-[1px] bg-[#aeaeae] max-sm:hidden" />
+        <div 
+  className={`h-4 w-[1px] ${
+    discount_percent > 0 ? "bg-yellow-400" : "bg-[#aeaeae]"
+  } max-sm:hidden`} 
+/>
+
         <div className="flex items-center gap-3">
           <div
             className={`group relative text-[15px] text-[#A4A4A4] line-through ${data?.is_details ? "text-base lg:!text-[19px]" : ""}`}
